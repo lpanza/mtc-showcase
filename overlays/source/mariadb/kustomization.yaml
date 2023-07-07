@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: test-migration
+
+resources:
+- mariadb.yaml
+- pvc.yaml
+- service.yaml
+
+secretGenerator:
+- name: database-creds
+  namespace: test-migration
+  literals:
+  - username=testuser
+  - password=testpass
+  - database=testdb
+  - rootpass=r00tpw
