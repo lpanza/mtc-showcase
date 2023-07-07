@@ -7,6 +7,10 @@ resources:
 - mariadb.yaml
 - pvc.yaml
 - service.yaml
+- createRows.yaml
+- roleBinding.yaml
+- roleGetExecPods.yaml
+- sa.yaml
 
 secretGenerator:
 - name: database-creds

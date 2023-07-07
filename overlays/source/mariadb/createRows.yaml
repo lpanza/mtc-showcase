@@ -1,0 +1,26 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: populate-database
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      serviceAccount: populate-database
+      serviceAccountName: populate-database
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+        command:
+        - /bin/bash
+        args:
+        - -c
+        - |-
+          export MARIADB_POD=`oc get pods -n test-migration -l app=mariadb -o name | awk -F/ '{ print $2 }'` &&
+          echo "MariaDB Pod: $MARIADB_POD"
+          oc exec $MARIADB_POD -- mysql -uroot testdb -e 'create table if not exists messages ( id int not null auto_increment, message varchar(255) not null, primary key (id))' &&
+          echo "Table created." &&
+          oc exec $MARIADB_POD -- mysql -uroot testdb -e "insert into messages (message) values ('This is a test message');" &&
+          echo "Row added." &&
+          oc exec $MARIADB_POD -- mysql -uroot testdb -e "select * from messages;"
+        name: populate-database
