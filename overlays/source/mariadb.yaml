@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb
+  namespace: test-migration
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: database-creds
+              key: username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-creds
+              key: password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: database-creds
+              key: database
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-creds
+              key: rootpass
+        image: registry.redhat.io/rhel8/mariadb-105@sha256:c9509fc4d750aaff976b53dcf14a266cc836789fd678c1964000e347966ce102
+        ports:
+        - containerPort: 3306
+          name: mariadb
+        imagePullPolicy: IfNotPresent
+        name: mariadb
+        volumeMounts:
+        - mountPath: /var/lib/mysql/data
+          name: mariadb-pv
+      volumes:
+      - name: mariadb-pv
+        persistentVolumeClaim:
+          claimName: mariadb-pv
