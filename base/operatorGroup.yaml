@@ -4,7 +4,6 @@ kind: OperatorGroup
 metadata:
   generateName: openshift-migration-
   name: openshift-migration
-  namespace: openshift-migration
 spec:
   targetNamespaces:
   - openshift-migration
