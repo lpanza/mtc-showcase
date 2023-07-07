@@ -1,0 +1,19 @@
+---
+apiVersion: migration.openshift.io/v1alpha1
+kind: MigrationController
+metadata:
+  name: migration-controller
+  namespace: openshift-migration
+spec:
+  migration_controller: false
+  migration_ui: false
+  mig_namespace_limit: '10'
+  mig_pod_limit: '100'
+  migration_log_reader: true
+  olm_managed: true
+  cluster_name: host
+  restic_timeout: 1h
+  migration_velero: true
+  mig_pv_limit: '100'
+  version: 1.7.10
+  azure_resource_group: ''
