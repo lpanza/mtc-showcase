@@ -16,7 +16,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: registry.access.redhat.com/ubi8/nginx-122:1-18
+      - image: registry.access.redhat.com/ubi9/nginx-122@sha256:52d41fe3f6b2cdecc1b195b64f74568f21bc1b8976a7ca5bb479013ba98a4beb
         name: nginx
         command:
         - nginx
