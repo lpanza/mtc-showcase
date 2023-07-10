@@ -10,8 +10,8 @@ In the ```base``` directory, you will find the default objects needed for the MT
 In the ```overlays``` directory, you will find the various host types:
 
 * ```host```, the OCP Cluster where the Migration Controller / UI will be located (usually the target cluster, but can be an external one):
-  * ```ObjectBucketClaim``` required by the migration process (note: we are using OpenShift Data Foundation in this example, which is provided here: https://github.com/lpanza/multicluster-devsecops);
-  * a Kustomize patch to add the Migration Controller and Migration UI capabilities to the already defined ```MigrationController```.
+  * ```ObjectBucketClaim``` because an S3 bucket is required by the migration process (note: we are using OpenShift Data Foundation in this example, which is provided here: https://github.com/lpanza/multicluster-devsecops);
+  * a Kustomize patch to add the Migration Controller and Migration UI capabilities to the ```MigrationController``` already defined in ```base```.
 * ```source```, the OCP Cluster where the migration process will start:
   * ```test-migration Namespace``` where we are going to set up our workload;
   * ```mariadb``` all the required objects to create a stateful application based on MariaDB;
