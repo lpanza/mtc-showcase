@@ -1,0 +1,11 @@
+---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: migration-bucket
+  namespace: openshift-migration
+spec:
+  additionalConfig:
+    bucketclass: noobaa-default-bucket-class
+  generateBucketName: migration-bucket
+  storageClassName: openshift-storage.noobaa.io
