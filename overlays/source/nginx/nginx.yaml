@@ -28,6 +28,10 @@ spec:
           name: http
         - containerPort: 8443
           name: https
+        volumeMounts:
+        - name: nginx-conf
+          mountPath: /opt/app-root/src/index.html
+          subPath: index.html
         resources:
           requests:
             cpu: 100m
@@ -35,3 +39,10 @@ spec:
           limits:
             cpu: 200m
             memory: "256Mi"
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf
+          items:
+          - key: index.html
+            path: index.html

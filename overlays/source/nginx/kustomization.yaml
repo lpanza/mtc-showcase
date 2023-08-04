@@ -7,3 +7,8 @@ resources:
 - nginx.yaml
 - service.yaml
 - route.yaml
+
+configMapGenerator:
+- name: nginx-conf
+  files:
+  - index.html
