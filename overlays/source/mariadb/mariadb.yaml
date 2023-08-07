@@ -48,6 +48,14 @@ spec:
         - containerPort: 3306
           name: mariadb
         imagePullPolicy: IfNotPresent
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
         name: mariadb
         volumeMounts:
         - mountPath: /var/lib/mysql/data

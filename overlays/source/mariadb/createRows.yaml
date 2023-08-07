@@ -11,6 +11,14 @@ spec:
       serviceAccountName: populate-database
       containers:
       - image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+            - ALL
         command:
         - /bin/bash
         args:
