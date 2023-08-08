@@ -13,10 +13,14 @@ resources:
 - sa.yaml
 
 secretGenerator:
-- name: database-creds
-  namespace: test-migration
-  literals:
+- literals:
   - username=testuser
   - password=testpass
   - database=testdb
   - rootpass=r00tpw
+  name: database-creds
+  namespace: test-migration
+images:
+- digest: sha256:c9509fc4d750aaff976b53dcf14a266cc836789fd678c1964000e347966ce102
+  name: mariadb
+  newName: registry.redhat.io/rhel8/mariadb-105

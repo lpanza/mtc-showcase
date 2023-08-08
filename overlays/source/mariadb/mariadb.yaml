@@ -43,7 +43,7 @@ spec:
           limits:
             cpu: 200m
             memory: 512Mi
-        image: registry.redhat.io/rhel8/mariadb-105@sha256:c9509fc4d750aaff976b53dcf14a266cc836789fd678c1964000e347966ce102
+        image: mariadb
         ports:
         - containerPort: 3306
           name: mariadb
