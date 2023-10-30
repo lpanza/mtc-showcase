@@ -14,5 +14,5 @@ spec:
   restic_timeout: 1h
   migration_velero: true
   mig_pv_limit: '100'
-  version: 1.7.10
+  version: 1.8.0
   azure_resource_group: ''
